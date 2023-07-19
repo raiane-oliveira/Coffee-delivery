@@ -42,7 +42,7 @@ export const TitleContainer = styled.div`
   display: grid;
   gap: 0.5rem;
   margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 
   div {
     color: ${(props) => props.theme['base-subtitle']};
