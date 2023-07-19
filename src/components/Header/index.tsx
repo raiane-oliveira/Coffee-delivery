@@ -8,8 +8,11 @@ import {
   LogoContainer,
   NavContainer,
 } from './styles'
+import { useCoffeeContext } from '../../contexts/CoffeeContext'
 
 export function Header() {
+  const { shoppingCart } = useCoffeeContext()
+
   return (
     <HeaderContainer>
       <NavContainer>
@@ -27,7 +30,7 @@ export function Header() {
           </LocationContainer>
 
           <ContainerShoppingCart>
-            {/* <span>3</span> */}
+            {!!shoppingCart && <span>{shoppingCart}</span>}
 
             <button type="button" aria-label="Abrir carrinho de compras">
               <ShoppingCart aria-hidden size={22} weight="fill" />

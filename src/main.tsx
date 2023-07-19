@@ -5,12 +5,15 @@ import { Router } from './Router'
 import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/themes/default'
 import { GlobalStyle } from './styles/global'
+import { CoffeeContextProvider } from './contexts/CoffeeContext'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <Router />
+        <CoffeeContextProvider>
+          <Router />
+        </CoffeeContextProvider>
       </BrowserRouter>
 
       <GlobalStyle />

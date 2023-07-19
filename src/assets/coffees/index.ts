@@ -1,6 +1,6 @@
 export { default as CoffeeAmericano } from './type-americano.png'
 export { default as CoffeeComLeite } from './type-caf-com-leite.png'
-export { default as CoffeeGelato } from './type-caf-gelado.png'
+export { default as CoffeeGelado } from './type-caf-gelado.png'
 export { default as CoffeeCapuccino } from './type-capuccino.png'
 export { default as ChocolateQuente } from './type-chocolate-quente.png'
 export { default as CoffeeCubano } from './type-cubano.png'
