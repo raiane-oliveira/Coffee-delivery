@@ -1,5 +1,5 @@
 import { ShoppingCart } from '@phosphor-icons/react'
-import { useCoffeeContext } from '../../../../contexts/CoffeeContext'
+import { useDeliveriesContext } from '../../../../contexts/DeliveriesContext'
 import {
   CoffeesContainer,
   CoffeesGrid,
@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom'
 import { ActionsCoffeeCard } from '../../../../components/ActionsCoffeeCard'
 
 export function Coffees() {
-  const { coffees } = useCoffeeContext()
+  const { coffees } = useDeliveriesContext()
 
   const formatterCurrency = new Intl.NumberFormat('pt-BR', {
     minimumFractionDigits: 2,

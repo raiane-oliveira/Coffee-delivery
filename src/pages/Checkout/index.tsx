@@ -18,7 +18,7 @@ import {
   TitleContentCheckout,
   TitleFieldsetFormCheckout,
 } from './styles'
-import { useCoffeeContext } from '../../contexts/CoffeeContext'
+import { useDeliveriesContext } from '../../contexts/DeliveriesContext'
 
 const formCheckoutValidationSchema = zod.object({
   cep: zod.coerce.number().min(5),
@@ -38,7 +38,7 @@ const formCheckoutValidationSchema = zod.object({
 type FormCheckoutData = zod.infer<typeof formCheckoutValidationSchema>
 
 export function Checkout() {
-  const { addNewOrder } = useCoffeeContext()
+  const { addNewOrder } = useDeliveriesContext()
   const theme = useTheme()
   const scheduleNewDelivery = useForm<FormCheckoutData>({
     resolver: zodResolver(formCheckoutValidationSchema),

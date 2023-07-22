@@ -1,4 +1,5 @@
-import { Coffee, useCoffeeContext } from '../../contexts/CoffeeContext'
+import { useDeliveriesContext } from '../../contexts/DeliveriesContext'
+import { Coffee } from '../../reducers/deliveries/reducer'
 import { CounterCoffeeCardInput } from './styles'
 
 interface ActionsCoffeeCardCounterProps {
@@ -8,7 +9,7 @@ interface ActionsCoffeeCardCounterProps {
 export function ActionsCoffeeCardCounter({
   coffee,
 }: ActionsCoffeeCardCounterProps) {
-  const { addNewCoffeeToCart } = useCoffeeContext()
+  const { addNewCoffeeToCart } = useDeliveriesContext()
 
   function handleAddNewProductToCart(e: any, id: number) {
     addNewCoffeeToCart(id, Number(e.target.value))

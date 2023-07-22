@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { useCoffeeContext } from '../../../../contexts/CoffeeContext'
+import { useDeliveriesContext } from '../../../../contexts/DeliveriesContext'
 import {
   CardCoffeeContainer,
   CardCoffeeDetails,
@@ -16,7 +16,7 @@ import {
 import { ActionsCoffeeCard } from '../../../../components/ActionsCoffeeCard'
 
 export function SelectedCoffees() {
-  const { coffees } = useCoffeeContext()
+  const { coffees } = useDeliveriesContext()
   const selectedCoffees = coffees.filter(
     (coffee) => coffee.amountInShoppingCart > 0,
   )

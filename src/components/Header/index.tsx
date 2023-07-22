@@ -8,11 +8,11 @@ import {
   LogoContainer,
   NavContainer,
 } from './styles'
-import { useCoffeeContext } from '../../contexts/CoffeeContext'
+import { useDeliveriesContext } from '../../contexts/DeliveriesContext'
 import { Link } from 'react-router-dom'
 
 export function Header() {
-  const { shoppingCart } = useCoffeeContext()
+  const { shoppingCart } = useDeliveriesContext()
 
   return (
     <HeaderContainer>

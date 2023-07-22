@@ -1,5 +1,5 @@
 import { Trash } from '@phosphor-icons/react'
-import { useCoffeeContext } from '../../contexts/CoffeeContext'
+import { useDeliveriesContext } from '../../contexts/DeliveriesContext'
 import { RemoveCoffeeFromCartButton } from './styles'
 
 interface ActionsCoffeeCardRemoveProps {
@@ -9,7 +9,7 @@ interface ActionsCoffeeCardRemoveProps {
 export function ActionsCoffeeCardRemove({
   coffeeId,
 }: ActionsCoffeeCardRemoveProps) {
-  const { removeCoffeeFromCart } = useCoffeeContext()
+  const { removeCoffeeFromCart } = useDeliveriesContext()
 
   return (
     <RemoveCoffeeFromCartButton

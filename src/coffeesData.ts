@@ -14,7 +14,7 @@ import {
   CoffeeMacchiato,
   CoffeeMochaccino,
 } from './assets/coffees'
-import { Coffee } from './contexts/CoffeeContext'
+import { Coffee } from './reducers/deliveries/reducer'
 
 export const coffeesData: Coffee[] = [
   {

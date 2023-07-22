@@ -1,4 +1,11 @@
 import { useTheme } from 'styled-components'
+import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
+
+import {
+  PaymentMethodsType,
+  useDeliveriesContext,
+} from '../../contexts/DeliveriesContext'
+
 import {
   IllustrationContainer,
   OrderInfo,
@@ -7,16 +14,12 @@ import {
   SuccessOrderContainer,
   TitleSuccessOrderContainer,
 } from './styles'
-import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
-import {
-  PaymentMethodsType,
-  useCoffeeContext,
-} from '../../contexts/CoffeeContext'
+
 import { IllustrationSuccess } from '../../assets'
 
 export function Success() {
   const theme = useTheme()
-  const { orders } = useCoffeeContext()
+  const { orders } = useDeliveriesContext()
   const lastOrder = orders[orders.length - 1]
   const formatedPaymentMethod =
     lastOrder.paymentMethod === PaymentMethodsType.cash

@@ -5,15 +5,15 @@ import { Router } from './Router'
 import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/themes/default'
 import { GlobalStyle } from './styles/global'
-import { CoffeeContextProvider } from './contexts/CoffeeContext'
+import { DeliveriesContextProvider } from './contexts/DeliveriesContext'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <CoffeeContextProvider>
+        <DeliveriesContextProvider>
           <Router />
-        </CoffeeContextProvider>
+        </DeliveriesContextProvider>
       </BrowserRouter>
 
       <GlobalStyle />

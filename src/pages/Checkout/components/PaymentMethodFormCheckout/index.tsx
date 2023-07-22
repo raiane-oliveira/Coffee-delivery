@@ -1,6 +1,6 @@
 import { Bank, CreditCard, Money } from '@phosphor-icons/react'
 import { PaymentMethod, PaymentMethodsContainer } from './styles'
-import { PaymentMethodsType } from '../../../../contexts/CoffeeContext'
+import { PaymentMethodsType } from '../../../../contexts/DeliveriesContext'
 import { useFormContext } from 'react-hook-form'
 
 export function PaymentMethodFormCheckout() {
