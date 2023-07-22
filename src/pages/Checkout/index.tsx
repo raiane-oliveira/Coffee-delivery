@@ -7,44 +7,38 @@ import { useTheme } from 'styled-components'
 import { InputAddressFormCheckout } from './components/InputAddressFormCheckout'
 import { PaymentMethodFormCheckout } from './components/PaymentMethodFormCheckout'
 import { SelectedCoffees } from './components/SelectedCoffees'
+import { Success } from '../Success'
 
 import {
-  BaseContentCheckoutContainer,
   CheckoutFormContainer,
+  CompleteOrderContainer,
   FieldsetFormCheckout,
   FormCheckoutContainer,
   OrderCheckoutContainer,
   TitleContentCheckout,
   TitleFieldsetFormCheckout,
 } from './styles'
-
-export enum PaymentMethodsType {
-  credit_card = 'credit_card',
-  debit_card = 'debit_card',
-  cash = 'cash',
-}
-
-const methodsOfPayment = ['credit_card', 'debit_card', 'cash']
+import { useCoffeeContext } from '../../contexts/CoffeeContext'
 
 const formCheckoutValidationSchema = zod.object({
-  cep: zod.number().min(5),
+  cep: zod.coerce.number().min(5),
   address: zod.string().nonempty('Obrigatório'),
-  number: zod.number().min(1, 'Obrigatório'),
+  numberHouse: zod.coerce.number().min(1, 'Obrigatório'),
   complemento: zod.string().optional(),
   bairro: zod.string().nonempty('Obrigatório'),
   city: zod.string().nonempty('Obrigatório'),
-  state: zod.string().nonempty('Obrigatório').max(2, 'Estado inválido'),
-  paymentMethod: zod
+  state: zod
     .string()
-    .refine(
-      (method) => methodsOfPayment.includes(method),
-      'Método de pagamento inválido',
-    ),
+    .nonempty('Obrigatório')
+    .max(2, 'Estado inválido')
+    .toUpperCase(),
+  paymentMethod: zod.string().nonempty('Obrigatório'),
 })
 
 type FormCheckoutData = zod.infer<typeof formCheckoutValidationSchema>
 
 export function Checkout() {
+  const { addNewOrder } = useCoffeeContext()
   const theme = useTheme()
   const scheduleNewDelivery = useForm<FormCheckoutData>({
     resolver: zodResolver(formCheckoutValidationSchema),
@@ -52,18 +46,22 @@ export function Checkout() {
 
   const {
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { isSubmitSuccessful },
   } = scheduleNewDelivery
 
   function handleScheduleNewDelivery(data: FormCheckoutData) {
-    console.log(data)
+    addNewOrder(data)
+    reset()
   }
+
+  if (isSubmitSuccessful) return <Success />
 
   return (
     <main>
       <CheckoutFormContainer onSubmit={handleSubmit(handleScheduleNewDelivery)}>
         <FormProvider {...scheduleNewDelivery}>
-          <BaseContentCheckoutContainer>
+          <CompleteOrderContainer>
             <TitleContentCheckout>Complete seu pedido</TitleContentCheckout>
 
             <FormCheckoutContainer>
@@ -96,7 +94,7 @@ export function Checkout() {
                 <PaymentMethodFormCheckout />
               </FieldsetFormCheckout>
             </FormCheckoutContainer>
-          </BaseContentCheckoutContainer>
+          </CompleteOrderContainer>
 
           <OrderCheckoutContainer>
             <TitleContentCheckout>Cafés selecionados</TitleContentCheckout>

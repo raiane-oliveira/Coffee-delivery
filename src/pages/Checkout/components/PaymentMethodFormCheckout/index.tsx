@@ -1,52 +1,61 @@
 import { Bank, CreditCard, Money } from '@phosphor-icons/react'
 import { PaymentMethod, PaymentMethodsContainer } from './styles'
-import { PaymentMethodsType } from '../..'
+import { PaymentMethodsType } from '../../../../contexts/CoffeeContext'
 import { useFormContext } from 'react-hook-form'
-import { useState } from 'react'
 
 export function PaymentMethodFormCheckout() {
-  const [paymentMethodId, setPaymentMethodId] = useState<number | null>(null)
-  const { register } = useFormContext()
+  const { register, watch } = useFormContext()
 
-  function handleSelectPaymentMethod(id: number) {
-    if (paymentMethodId !== id) {
-      setPaymentMethodId(id)
-    } else {
-      setPaymentMethodId(null)
-    }
-  }
+  const paymentMethod = watch('paymentMethod')
 
   return (
     <PaymentMethodsContainer>
       <PaymentMethod
-        type="button"
-        onClick={() => handleSelectPaymentMethod(0)}
-        className={paymentMethodId === 0 ? 'selected' : ''}
-        value={PaymentMethodsType.credit_card}
-        {...register('paymentMethod')}
+        htmlFor={PaymentMethodsType.credit_card}
+        className={
+          paymentMethod === PaymentMethodsType.credit_card
+            ? 'selected'
+            : undefined
+        }
       >
+        <input
+          type="radio"
+          {...register('paymentMethod')}
+          value={PaymentMethodsType.credit_card}
+          id={PaymentMethodsType.credit_card}
+        />
         <CreditCard aria-hidden />
-        <span>Cartão de crédito</span>
+        <span>Cartão de Crédito</span>
       </PaymentMethod>
-
       <PaymentMethod
-        type="button"
-        onClick={() => handleSelectPaymentMethod(1)}
-        className={paymentMethodId === 1 ? 'selected' : ''}
-        value={PaymentMethodsType.debit_card}
-        {...register('paymentMethod')}
+        htmlFor={PaymentMethodsType.debit_card}
+        className={
+          paymentMethod === PaymentMethodsType.debit_card
+            ? 'selected'
+            : undefined
+        }
       >
+        <input
+          type="radio"
+          {...register('paymentMethod')}
+          value={PaymentMethodsType.debit_card}
+          id={PaymentMethodsType.debit_card}
+        />
         <Bank aria-hidden />
-        <span>Cartão de débito</span>
+        <span>Cartão de Débito</span>
       </PaymentMethod>
-
       <PaymentMethod
-        type="button"
-        onClick={() => handleSelectPaymentMethod(2)}
-        className={paymentMethodId === 2 ? 'selected' : ''}
-        value={PaymentMethodsType.cash}
-        {...register('paymentMethod')}
+        htmlFor={PaymentMethodsType.cash}
+        className={
+          paymentMethod === PaymentMethodsType.cash ? 'selected' : undefined
+        }
       >
+        <input
+          type="radio"
+          {...register('paymentMethod')}
+          value={PaymentMethodsType.cash}
+          id={PaymentMethodsType.cash}
+        />
         <Money aria-hidden />
         <span>Dinheiro</span>
       </PaymentMethod>

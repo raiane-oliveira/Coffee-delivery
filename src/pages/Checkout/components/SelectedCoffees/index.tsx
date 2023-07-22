@@ -6,6 +6,7 @@ import {
   CardCoffeeInfo,
   CardCoffeePrice,
   CardCoffeeTitle,
+  CardsCoffeeWrapper,
   SelectedCoffeesContainer,
   SendOrderButton,
   TotalOrderDeliveryContainer,
@@ -35,32 +36,38 @@ export function SelectedCoffees() {
   })
   const taxDelivery = selectedCoffees.length > 0 ? 3.5 : 0
 
+  const isSubmitDisabled = totalItemsValue === 0
+
   return (
     <SelectedCoffeesContainer>
-      {selectedCoffees.map((coffee) => (
-        <Fragment key={coffee.id}>
-          <CardCoffeeContainer>
-            <CardCoffeeInfo>
-              <img src={coffee.img} alt="" aria-hidden />
+      {selectedCoffees.length > 0 && (
+        <CardsCoffeeWrapper>
+          {selectedCoffees.map((coffee) => (
+            <Fragment key={coffee.id}>
+              <CardCoffeeContainer>
+                <CardCoffeeInfo>
+                  <img src={coffee.img} alt="" aria-hidden />
 
-              <CardCoffeeDetails>
-                <CardCoffeeTitle>{coffee.name}</CardCoffeeTitle>
+                  <CardCoffeeDetails>
+                    <CardCoffeeTitle>{coffee.name}</CardCoffeeTitle>
 
-                <ActionsCoffeeCard.Root>
-                  <ActionsCoffeeCard.Counter coffee={coffee} />
-                  <ActionsCoffeeCard.Remove coffeeId={coffee.id} />
-                </ActionsCoffeeCard.Root>
-              </CardCoffeeDetails>
-            </CardCoffeeInfo>
+                    <ActionsCoffeeCard.Root>
+                      <ActionsCoffeeCard.Counter coffee={coffee} />
+                      <ActionsCoffeeCard.Remove coffeeId={coffee.id} />
+                    </ActionsCoffeeCard.Root>
+                  </CardCoffeeDetails>
+                </CardCoffeeInfo>
 
-            <CardCoffeePrice>
-              {formatterCurrency.format(coffee.price)}
-            </CardCoffeePrice>
-          </CardCoffeeContainer>
+                <CardCoffeePrice>
+                  {formatterCurrency.format(coffee.price)}
+                </CardCoffeePrice>
+              </CardCoffeeContainer>
 
-          <hr />
-        </Fragment>
-      ))}
+              <hr />
+            </Fragment>
+          ))}
+        </CardsCoffeeWrapper>
+      )}
 
       <TotalOrderDeliveryContainer>
         <TotalOrderDeliveryInfo>
@@ -79,7 +86,9 @@ export function SelectedCoffees() {
         </TotalOrderDeliveryTitle>
       </TotalOrderDeliveryContainer>
 
-      <SendOrderButton type="submit">Confirmar pedido</SendOrderButton>
+      <SendOrderButton disabled={isSubmitDisabled} type="submit">
+        Confirmar pedido
+      </SendOrderButton>
     </SelectedCoffeesContainer>
   )
 }

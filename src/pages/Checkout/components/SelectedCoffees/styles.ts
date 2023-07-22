@@ -8,13 +8,34 @@ export const SelectedCoffeesContainer = styled.div`
   border-radius: 0.375rem 2.75rem;
   padding: 2.5rem;
 
-  @media (min-width: 978px) {
+  @media (min-width: 1060px) {
     width: 28rem;
   }
 
   hr {
     border: 0;
     border-bottom: 1px solid ${(props) => props.theme['base-button']};
+  }
+`
+
+export const CardsCoffeeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-right: 1rem;
+
+  max-height: 23.5rem;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: ${(props) => props.theme['base-card']};
+    border-radius: 9999px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme['base-hover']};
+    border-radius: 9999px;
   }
 `
 
@@ -89,10 +110,15 @@ export const SendOrderButton = styled.button`
   line-height: 1.6;
   border: 0;
   border-radius: 0.375rem;
-  cursor: pointer;
   transition: 0.2s;
+  cursor: pointer;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: ${(props) => props.theme['yellow-dark']};
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 `

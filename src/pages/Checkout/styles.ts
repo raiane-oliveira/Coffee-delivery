@@ -11,11 +11,18 @@ export const CheckoutFormContainer = styled.form`
   padding-top: 2.5rem;
 `
 
-export const BaseContentCheckoutContainer = styled.div`
-  flex: 2;
+const BaseContentCheckoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.94rem;
+`
+
+export const CompleteOrderContainer = styled(BaseContentCheckoutContainer)`
+  flex: 2;
+
+  @media (min-width: 532px) {
+    flex-basis: 33rem;
+  }
 `
 
 export const OrderCheckoutContainer = styled(BaseContentCheckoutContainer)`

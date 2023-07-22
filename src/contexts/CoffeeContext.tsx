@@ -1,6 +1,12 @@
 import { ReactNode, createContext, useContext, useState } from 'react'
 import { coffeesData } from '../coffeesData'
 
+export enum PaymentMethodsType {
+  credit_card = 'credit_card',
+  debit_card = 'debit_card',
+  cash = 'cash',
+}
+
 export interface Coffee {
   id: number | string
   tags: string[]
@@ -11,15 +17,31 @@ export interface Coffee {
   amountInShoppingCart: number
 }
 
+interface Order {
+  id: number | string
+  cep: number
+  address: string
+  numberHouse: number
+  complemento?: string
+  bairro: string
+  city: string
+  state: string
+  paymentMethod: string
+}
+
+type CreateNewOrderData = Omit<Order, 'id'>
+
 interface CoffeeContextProviderProps {
   children: ReactNode
 }
 
 interface CoffeeContextType {
   coffees: Coffee[]
+  orders: Order[]
   shoppingCart: number
   addNewCoffeeToCart: (id: number, amount: number) => void
   removeCoffeeFromCart: (id: number | string) => void
+  addNewOrder: (orderFormData: CreateNewOrderData) => void
 }
 
 const CoffeeContext = createContext({} as CoffeeContextType)
@@ -28,6 +50,7 @@ export function CoffeeContextProvider({
   children,
 }: CoffeeContextProviderProps) {
   const [coffees, setCoffees] = useState<Coffee[]>(coffeesData)
+  const [orders, setOrders] = useState<Order[]>([])
 
   const shoppingCart =
     coffees.length > 0
@@ -66,13 +89,30 @@ export function CoffeeContextProvider({
     )
   }
 
+  function addNewOrder(orderFormData: CreateNewOrderData) {
+    const newOrder: Order = {
+      id: new Date().getTime(),
+      ...orderFormData,
+    }
+
+    setOrders((prevOrders) => [...prevOrders, newOrder])
+    setCoffees((prevCoffees) =>
+      prevCoffees.map((coffee) => ({
+        ...coffee,
+        amountInShoppingCart: 0,
+      })),
+    )
+  }
+
   return (
     <CoffeeContext.Provider
       value={{
         coffees,
-        addNewCoffeeToCart,
+        orders,
         shoppingCart,
+        addNewCoffeeToCart,
         removeCoffeeFromCart,
+        addNewOrder,
       }}
     >
       {children}

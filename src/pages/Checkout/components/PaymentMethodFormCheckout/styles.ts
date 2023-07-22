@@ -6,7 +6,7 @@ export const PaymentMethodsContainer = styled.div`
   gap: 0.75rem;
 `
 
-export const PaymentMethod = styled.button`
+export const PaymentMethod = styled.label`
   flex: 1;
   display: flex;
   align-items: center;
@@ -18,6 +18,11 @@ export const PaymentMethod = styled.button`
   cursor: pointer;
   transition: 0.1s;
 
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: ${(props) => props.theme['base-text']};
+
   &:hover {
     background: ${(props) => props.theme['base-hover']};
   }
@@ -25,6 +30,11 @@ export const PaymentMethod = styled.button`
   &.selected {
     border: 1px solid ${(props) => props.theme.purple};
     background: ${(props) => props.theme['purple-light']};
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
   }
 
   svg {
@@ -35,10 +45,6 @@ export const PaymentMethod = styled.button`
 
   span {
     flex: 1;
-    text-align: left;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    line-height: 1.6;
-    color: ${(props) => props.theme['base-text']};
+    white-space: nowrap;
   }
 `
