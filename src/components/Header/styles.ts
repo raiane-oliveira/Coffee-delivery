@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 export const HeaderContainer = styled.header`
@@ -10,7 +11,8 @@ export const NavContainer = styled.nav`
   align-items: center;
 `
 
-export const LogoContainer = styled.div`
+export const LogoContainer = styled(Link)`
+  display: block;
   width: 5.3rem;
   height: 2.5rem;
 
@@ -56,10 +58,10 @@ export const ContainerShoppingCart = styled.div`
       sans-serif;
   }
 
-  button {
+  a {
+    display: block;
     line-height: 0;
     padding: 0.5rem;
-    border: 0;
     border-radius: 0.375rem;
     background: ${(props) => props.theme['yellow-light']};
     color: ${(props) => props.theme['yellow-dark']};

@@ -18,4 +18,10 @@ export const GlobalStyle = createGlobalStyle`
   button {
     font: 400 1rem "Roboto", sans-serif;
   }
+
+  @media (max-width: 480px) {
+    :root {
+      font-size: 87%;
+    }
+  }
 `

@@ -10,14 +10,15 @@ import {
   PriceContainer,
   TitleContainer,
 } from './styles'
-import { ChangeEvent } from 'react'
+import { Link } from 'react-router-dom'
+import { ActionsCoffeeCard } from '../../../../components/ActionsCoffeeCard'
 
 export function Coffees() {
-  const { coffees, addNewCoffeeToCart } = useCoffeeContext()
+  const { coffees } = useCoffeeContext()
 
-  function handleAddNewProductToCart(e: ChangeEvent, id: number) {
-    addNewCoffeeToCart(id, Number(e.target.value))
-  }
+  const formatterCurrency = new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+  })
 
   return (
     <CoffeesContainer>
@@ -43,20 +44,15 @@ export function Coffees() {
             <PriceCartContainer>
               <PriceContainer>
                 <span>R$</span>
-                <span>{coffee.price.toLocaleString('pt-BR')}</span>
+                <span>{formatterCurrency.format(coffee.price)}</span>
               </PriceContainer>
 
               <CartContainer>
-                <input
-                  type="number"
-                  name=""
-                  min={0}
-                  onChange={(e) => handleAddNewProductToCart(e, coffee.id)}
-                />
+                <ActionsCoffeeCard.Counter coffee={coffee} />
 
-                <div>
+                <Link to="/checkout">
                   <ShoppingCart aria-hidden size={22} weight="fill" />
-                </div>
+                </Link>
               </CartContainer>
             </PriceCartContainer>
           </CoffeeCardContainer>

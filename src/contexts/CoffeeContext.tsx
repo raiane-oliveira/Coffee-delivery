@@ -19,6 +19,7 @@ interface CoffeeContextType {
   coffees: Coffee[]
   shoppingCart: number
   addNewCoffeeToCart: (id: number, amount: number) => void
+  removeCoffeeFromCart: (id: number | string) => void
 }
 
 const CoffeeContext = createContext({} as CoffeeContextType)
@@ -27,7 +28,13 @@ export function CoffeeContextProvider({
   children,
 }: CoffeeContextProviderProps) {
   const [coffees, setCoffees] = useState<Coffee[]>(coffeesData)
-  const [shoppingCart, setShoppingCart] = useState(0)
+
+  const shoppingCart =
+    coffees.length > 0
+      ? coffees
+          .map((coffee) => coffee.amountInShoppingCart)
+          .reduce((accumulator, currentValue) => accumulator + currentValue)
+      : 0
 
   function addNewCoffeeToCart(id: number, amount: number) {
     setCoffees((state) =>
@@ -42,25 +49,31 @@ export function CoffeeContextProvider({
         }
       }),
     )
+  }
 
-    if (amount >= 0) {
-      const sumTotalShoppingCart = coffees
-        .map((coffee) => {
-          if (coffee.id === id) {
-            return amount
-          } else {
-            return coffee.amountInShoppingCart
+  function removeCoffeeFromCart(id: number | string) {
+    setCoffees((state) =>
+      state.map((coffee) => {
+        if (coffee.id === id) {
+          return {
+            ...coffee,
+            amountInShoppingCart: 0,
           }
-        })
-        .reduce((accumulator, currentValue) => accumulator + currentValue)
-
-      setShoppingCart(sumTotalShoppingCart)
-    }
+        } else {
+          return coffee
+        }
+      }),
+    )
   }
 
   return (
     <CoffeeContext.Provider
-      value={{ coffees, addNewCoffeeToCart, shoppingCart }}
+      value={{
+        coffees,
+        addNewCoffeeToCart,
+        shoppingCart,
+        removeCoffeeFromCart,
+      }}
     >
       {children}
     </CoffeeContext.Provider>

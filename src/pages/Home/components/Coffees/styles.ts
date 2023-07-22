@@ -27,7 +27,6 @@ export const CoffeeCardContainer = styled.div`
   border-radius: 0.375rem 2.25rem;
   padding: 1.25rem;
   text-align: center;
-  /* max-width: 16rem; */
   position: relative;
 `
 
@@ -38,6 +37,8 @@ export const ImgCoffeeContainer = styled.div`
   img {
     display: block;
     transform: translateY(-2.5rem);
+    width: 7.5rem;
+    height: 7.5rem;
   }
 
   div {
@@ -104,21 +105,16 @@ export const CartContainer = styled.div`
   align-items: center;
   gap: 0.5rem;
 
-  input {
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-    border: 0;
-    background: ${(props) => props.theme['base-button']};
-    color: ${(props) => props.theme['base-title']};
-    line-height: 1.3;
-    width: 4.5rem;
-  }
-
-  div {
+  a {
     padding: 0.5rem;
     background-color: ${(props) => props.theme['purple-dark']};
     color: ${(props) => props.theme['base-card']};
     line-height: 0;
     border-radius: 0.375rem;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: ${(props) => props.theme.purple};
+    }
   }
 `

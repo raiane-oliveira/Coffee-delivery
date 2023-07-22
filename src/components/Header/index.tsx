@@ -9,6 +9,7 @@ import {
   NavContainer,
 } from './styles'
 import { useCoffeeContext } from '../../contexts/CoffeeContext'
+import { Link } from 'react-router-dom'
 
 export function Header() {
   const { shoppingCart } = useCoffeeContext()
@@ -16,7 +17,7 @@ export function Header() {
   return (
     <HeaderContainer>
       <NavContainer>
-        <LogoContainer>
+        <LogoContainer to="/">
           <img
             src={LogoCoffeeDelivery}
             alt="Copo de café ao lado do texto 'Coffee Delivery'"
@@ -32,9 +33,9 @@ export function Header() {
           <ContainerShoppingCart>
             {!!shoppingCart && <span>{shoppingCart}</span>}
 
-            <button type="button" aria-label="Abrir carrinho de compras">
+            <Link to="/checkout" aria-label="Abrir carrinho de compras">
               <ShoppingCart aria-hidden size={22} weight="fill" />
-            </button>
+            </Link>
           </ContainerShoppingCart>
         </InfoContainer>
       </NavContainer>
