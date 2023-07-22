@@ -1,4 +1,4 @@
-import { MapPin, ShoppingCart } from '@phosphor-icons/react'
+import { MapPin, Scroll, ShoppingCart } from '@phosphor-icons/react'
 import { LogoCoffeeDelivery } from '../../assets'
 import {
   ContainerShoppingCart,
@@ -33,10 +33,14 @@ export function Header() {
           <ContainerShoppingCart>
             {!!shoppingCart && <span>{shoppingCart}</span>}
 
-            <Link to="/checkout" aria-label="Abrir carrinho de compras">
+            <Link to="/checkout" title="Carrinho de compras">
               <ShoppingCart aria-hidden size={22} weight="fill" />
             </Link>
           </ContainerShoppingCart>
+
+          <Link to="/history" title="Histórico de pedidos">
+            <Scroll aria-hidden size={22} weight="fill" />
+          </Link>
         </InfoContainer>
       </NavContainer>
     </HeaderContainer>
