@@ -24,7 +24,7 @@
 ## 💻 About
 It's an application to manage a shopping cart for a fictional coffee shop, allowing make orders to the site.
 
-<img src="https://imgur.com/a/ohPvxL2.png" />
+<img src="https://i.imgur.com/kc8EtkQ.png" />
 
 It was offered in Rocketseat's Ignite course.
 
