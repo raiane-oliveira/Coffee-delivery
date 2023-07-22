@@ -1,6 +1,8 @@
 <h1 align="center">
   <a  href="https://raianecoffeedelivery.vercel.app/">
-    <img src="src/assets/logo.svg" alt="" />
+	<div>
+  	<img src="src/assets/logo.svg" alt="" />
+	</div>
     Coffee Delivery
   </a>
 </h1>
