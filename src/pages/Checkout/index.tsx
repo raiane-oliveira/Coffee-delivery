@@ -32,7 +32,7 @@ const formCheckoutValidationSchema = zod.object({
     .nonempty('Obrigatório')
     .max(2, 'Estado inválido')
     .toUpperCase(),
-  paymentMethod: zod.string().nonempty('Obrigatório'),
+  paymentMethod: zod.enum(['credit_card', 'debit_card', 'cash']),
 })
 
 type FormCheckoutData = zod.infer<typeof formCheckoutValidationSchema>
