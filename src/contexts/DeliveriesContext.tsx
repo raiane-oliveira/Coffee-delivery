@@ -63,12 +63,10 @@ export function DeliveriesContextProvider({
   )
   const { coffees, orders } = deliveriesState
 
-  const shoppingCart =
-    coffees.length > 0
-      ? coffees
-          .map((coffee) => coffee.amountInShoppingCart)
-          .reduce((accumulator, currentValue) => accumulator + currentValue)
-      : 0
+  const shoppingCart = coffees.reduce((acc, coffee) => {
+    acc += coffee.amountInShoppingCart
+    return acc
+  }, 0)
 
   useEffect(() => {
     const stateJSON = JSON.stringify(deliveriesState)
