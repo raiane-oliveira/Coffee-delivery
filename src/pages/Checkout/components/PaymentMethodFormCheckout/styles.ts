@@ -1,12 +1,13 @@
 import { styled } from 'styled-components'
+import * as RadioGroup from '@radix-ui/react-radio-group'
 
-export const PaymentMethodsContainer = styled.div`
+export const PaymentMethodsContainer = styled(RadioGroup.Root)`
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 `
 
-export const PaymentMethod = styled.label`
+export const PaymentMethod = styled(RadioGroup.Item)`
   flex: 1;
   display: flex;
   align-items: center;
@@ -27,14 +28,9 @@ export const PaymentMethod = styled.label`
     background: ${(props) => props.theme['base-hover']};
   }
 
-  &.selected {
+  &[data-state='checked'] {
     border: 1px solid ${(props) => props.theme.purple};
     background: ${(props) => props.theme['purple-light']};
-  }
-
-  input {
-    position: absolute;
-    opacity: 0;
   }
 
   svg {
@@ -44,7 +40,6 @@ export const PaymentMethod = styled.label`
   }
 
   span {
-    flex: 1;
     white-space: nowrap;
   }
 `
